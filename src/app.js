@@ -1,9 +1,10 @@
 const express = require('express')
+const cookieParser = require("cookie-parser")
 
 app = express()
 
 app.use(express.json());// enable req.body to accept json in request
-
+app.use(cookieParser())
 
 /**Requiring all the routes */
 const authRouter = require("./routes/auth.route")
