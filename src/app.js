@@ -2,6 +2,9 @@ const express = require('express')
 
 app = express()
 
+app.use(express.json());// enable req.body to accept json in request
+
+
 /**Requiring all the routes */
 const authRouter = require("./routes/auth.route")
 

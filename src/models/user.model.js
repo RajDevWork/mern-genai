@@ -13,10 +13,11 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type:String,
-        required:true
+        required:true,
+        select: false // bi-default select preventing
     }
 },{
-    timeseries:true
+    timestamps:true
 })
 
 const userModel = mongoose.model("users",userSchema)
