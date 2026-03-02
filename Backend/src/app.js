@@ -1,7 +1,12 @@
 const express = require('express')
 const cookieParser = require("cookie-parser")
-
+const cors = require("cors")
 app = express()
+
+app.use(cors({
+    credentials:true,
+    origin:"http://localhost:5173"
+}))
 
 app.use(express.json());// enable req.body to accept json in request
 app.use(cookieParser())
