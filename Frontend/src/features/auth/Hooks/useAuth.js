@@ -1,4 +1,4 @@
-import { useContext } from "react"; // notmal context ko use karne ke liye
+import { useContext, useEffect } from "react"; // notmal context ko use karne ke liye
 import { AuthContext } from "../auth.context"; // hamara auth context
 import { login,register,logout,getMe } from "../services/auth.api"; // sabhi api functions ko import kar liya.
 
@@ -43,6 +43,17 @@ export const useAuth = ()=>{
         setUser(data.user)
         setIsLoading(false)
     }
+
+
+    useEffect(()=>{
+       const SetUser = async()=>{
+            const data = await getMe()
+            setUser(data.user)
+            setIsLoading(false)
+       }
+       SetUser()
+    },[])
+
 
     return {User,IsLoading,handleLogin,handleRegister,handleLogout,handleGetMe}
 
