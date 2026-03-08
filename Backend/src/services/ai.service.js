@@ -66,7 +66,9 @@ ${SELF_DESCRIPTION}
         }
     })
 
-    console.log(Response.text)
+    // console.log(Response.text)
+
+    return JSON.parse(Response.text)
 
 }
 

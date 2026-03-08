@@ -13,8 +13,10 @@ app.use(cookieParser())
 
 /**Requiring all the routes */
 const authRouter = require("./routes/auth.route")
+const interviewRouter = require("./routes/interview.route")
 
 /**Using all the routes here */
 app.use("/api/auth",authRouter)
+app.use("/api/interview",interviewRouter)
 
 module.exports = app
