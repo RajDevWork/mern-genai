@@ -18,30 +18,27 @@ async function generateInterviewReportController(req,res){
     }
 
 
-    const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
+     const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
+    const { selfDescription, jobDescription } = req.body
 
-    const {jobDescription,selfDescription} = req.body
-
-    const interviewReportByAI = await generateIntervieReport({
-        RESUME:resumeContent.text,
-        JOB_DESCRIPTION:jobDescription,
-        SELF_DESCRIPTION:selfDescription
+    const interViewReportByAi = await generateIntervieReport({
+        RESUME: resumeContent.text,
+        SELF_DESCRIPTION: selfDescription,
+        JOB_DESCRIPTION: jobDescription
     })
 
-
-    /***Create report */
+    console.log(interViewReportByAi)
 
     const interviewReport = await interviewReportModel.create({
-        user:req.user.id,
-        resume:resumeContent.text,
+        user: req.user.id,
+        resume: resumeContent.text,
         selfDescription,
         jobDescription,
-        ...interviewReportByAI
+        ...interViewReportByAi
     })
 
-
     res.status(201).json({
-        message:"Interview report generated successfully!",
+        message: "Interview report generated successfully.",
         interviewReport
     })
 
